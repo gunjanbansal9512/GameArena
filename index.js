@@ -1,15 +1,11 @@
-var data;
+var data=[];
 $(document).ready(function() {
     data = $.getJSON("http://starlord.hackerearth.com/gamesext", function(data) {
         //  console.log(data);
+        //$('#gameData').append(renderData);
         for (var i = 0; i < data.length; i++) {
-            // console.log(data[i]);
-            var row = '  <div class="col-sm-4 py-2" id="cards" ><div class="card card-body h-100" style="width: 20rem; display:inline-block;  margin:auto;  ">';
-            row += ' <img class="card-img-top" src="image.jpg" alt="Card image cap">';
-            row += '<div class="card-body">';
-            row += '<h5 class="card-title" id="title">Title : ' + data[i]["title"] + '</h5>';
-            row += '<p class="card-text">URL : ' + data[i]["url"] + '</p><p class="card-text">Platform : ' + data[i]["platform"] + '</p><p class="card-text">Score : ' + data[i]["score"] + '</p><p class="card-text">Genre : ' + data[i]["genre"] + '</p><p class="card-text">Editiors Choice : ' + data[i]["editors_choice"] + '</p><p class="card-text">Release Year : ' + data[i]["release_year"] + '</p></div></div></div>';
-            $('#gameData').append(row);
+            var gameObj = getCardRender(data[i]);
+            $('#gameData').append(gameObj);
         }
 
     });
@@ -17,8 +13,25 @@ $(document).ready(function() {
 
 
 });
+// Search
+function getCardRender(gameObj)
+{
+    var row = '  <div class="col-sm-3" id="cards" style="margin-top:8px " ><div class="card card-body h-100" style="width: 18rem;">';
+    row += ' <img class="card-img-top" src="image.jpg" alt="Card image cap">';
+    row += '<div class="card-body">';
+    row += '<h5 class="card-title" id="title">Title : ' +gameObj["title"] + '</h5>';
+    row +='<p class="card-subtitle mb-2">Platform : ' +gameObj["platform"] + '</p>';
+    row+='<p class="card-text">Score : ' + gameObj["score"] + '</p>';
+    row+='<p class="card-text">Genre : ' + gameObj["genre"] + '</p>';
+    row+='<p class="card-text">Editiors Choice : ' + gameObj["editors_choice"] + '</p>';
+    row+='<p class="card-text">Release Year : ' +gameObj["release_year"] + '</p>';
+    row += '<a class="card-link" href="#">URL : ' + gameObj["url"] + '</p>';
+    row+='</div></div></div>';
+   
+    return row;
 
-
+   // $('#gameData').append(renderData);
+}
 $("#searchBtn").on("click", function() {
     $('#gameData').empty(); //clean
     var searchText = $("#search").val().trim();
@@ -29,15 +42,37 @@ $("#searchBtn").on("click", function() {
         var title = restJsondata[i]['title'];
         if (title) {
             if (title.toString().toLowerCase().search(searchText.toLowerCase())==0) {
-                console.log(restJsondata[i]);
-                var row = '  <div class="col-sm-4 py-2" id="cards" ><div class="card card-body h-100" style="width: 20rem; display:inline-block;  margin:auto;  ">';
-                row += ' <img class="card-img-top" src="image.jpg" alt="Card image cap">';
-                row += '<div class="card-body">';
-                row += '<h5 class="card-title" id="title">Title : ' + restJsondata[i]["title"] + '</h5>';
-                row += '<p class="card-text">URL : ' + restJsondata[i]["url"] + '</p><p class="card-text">Platform : ' + restJsondata[i]["platform"] + '</p><p class="card-text">Score : ' + restJsondata[i]["score"] + '</p><p class="card-text">Genre : ' + restJsondata[i]["genre"] + '</p><p class="card-text">Editiors Choice : ' + restJsondata[i]["editors_choice"] + '</p><p class="card-text">Release Year : ' + restJsondata[i]["release_year"] + '</p></div></div></div>';
-                $('#gameData').append(row);
+               // console.log(restJsondata[i]);
+               var gameObj = getCardRender(restJsondata[i]);
+               $('#gameData').append(gameObj);
             }
         }
 
     }
 });
+// Low to high
+$("#sortD").on("click", function() {
+    $('#gameData').empty();
+    let restJsondata = data.responseJSON;
+   
+    restJsondata.sort((a, b) => Number(a.score) - Number(b.score));
+// console.log("ascending", restJsondata);
+for (var i = 0; i < restJsondata.length; i++) {
+    var gameObj = getCardRender(restJsondata[i]);
+    $('#gameData').append(gameObj);
+}
+}
+);
+// High to low
+$("#sortA").on("click", function() {
+    $('#gameData').empty();
+    let restJsondata = data.responseJSON;
+   
+    restJsondata.sort((a, b) => Number(b.score) - Number(a.score));
+// console.log("desc", restJsondata);
+for (var i = 0; i < restJsondata.length; i++) {
+    var gameObj = getCardRender(restJsondata[i]);
+    $('#gameData').append(gameObj);
+}
+}
+);
