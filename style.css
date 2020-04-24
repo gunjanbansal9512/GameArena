@@ -7,25 +7,6 @@
     margin-top: 0 !important;
 }
 
-.mt-1 {
-    margin-top: ($spacer * .25) !important;
-}
-
-.ml-1 {
-    margin-left: ($spacer * .25) !important;
-}
-
-.px-2 {
-    padding-left: ($spacer * .5) !important;
-    padding-right: ($spacer * .5) !important;
-    padding-top: ($spacer * .5) !important;
-
-}
-
-.p-3 {
-    padding: $spacer !important;
-}
-
 img {
     width: 150px;
     height: 100px;
@@ -91,3 +72,20 @@ input[type=submit] {
     background-color: DodgerBlue !important;
     color: #ffffff;
 }
+#loading{
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20%;
+    margin-bottom: 30%;
+}
+  
+  /* #loading-image {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  } */

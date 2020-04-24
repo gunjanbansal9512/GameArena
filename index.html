@@ -12,7 +12,10 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+   <div id="loading">
+      <img id="loading-image" src="loading.gif" alt="Loading..." class="img-fluid"/>
+    </div>
+    <div class="container-fluid" id="site">
         <!-- Navbar -->
         <nav class="navbar navbar-dark bg-dark justify-content-between " style=" background-image: linear-gradient(#0F2027,#203A43,#2C5364);">
             <a class="navbar-brand mb-0 h1" style="color: bisque;" href="index.html">Game Arena</a>
@@ -21,9 +24,6 @@
                 <input type="search" placeholder="Search..." aria-label="Search" id="search" style="width:300px;">
                 <button id="searchBtn" class="btn btn-light my-2 my-sm-0" style="background-color: #0F2027; color: wheat;">   Search
                 </button>
-               <!--  <div class="autocomplete" style="width:300px;">
-                  <input id="myInput" type="text" name="myCountry" placeholder="Country">
-               </div> -->
         </nav>
         <!-- Content Filter -->
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
@@ -40,7 +40,10 @@
             </ul>
         </nav>
         <!-- Data -->
-        <div class="container-fluid" style="background-image : linear-gradient(#0F2027,#203A43,#2C5364);">
+        <div class="container-fluid" style="background-image : linear-gradient(#0F2027,#203A43,#2C5364);display:block;
+        width:100%;
+        height:100%;
+        ">
             <div class="row" id="gameData" style="margin-left : 10px; margin-right: 15px;">
             </div>
         </div>
